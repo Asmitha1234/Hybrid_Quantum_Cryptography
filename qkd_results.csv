@@ -1,0 +1,7 @@
+Noise,QBER,KeyLength,Status
+0.0,0.092,500,Secure
+0.01,0.07229,498,Secure
+0.02,0.09144,514,Secure
+0.03,0.10537,503,Secure
+0.04,0.10504,476,Secure
+0.05,0.13043,506,Rejected

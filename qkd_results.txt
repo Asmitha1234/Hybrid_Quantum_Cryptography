@@ -1,0 +1,506 @@
+QKD Simulation Results
+==================================================
+
+Noise: 0.000, Eve: 0.000
+QBER (No Attack): 0.0
+QBER (With Attack): 0.0
+Status: Secure
+AES Key: 0d9a8b543df98216d744086852b9d9ea
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.001, Eve: 0.001
+QBER (No Attack): 0.0038
+QBER (With Attack): 0.0
+Status: Secure
+AES Key: 184832b2e2678752e785c82113fb3ca9
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.002, Eve: 0.002
+QBER (No Attack): 0.002
+QBER (With Attack): 0.0
+Status: Secure
+AES Key: a9394d27a3fb535b0e3ebef267e0156a
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.003, Eve: 0.003
+QBER (No Attack): 0.0021
+QBER (With Attack): 0.0059
+Status: Secure
+AES Key: 1c06544f01adb06da537aa709a3a11c3
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.004, Eve: 0.004
+QBER (No Attack): 0.002
+QBER (With Attack): 0.0041
+Status: Secure
+AES Key: 7706deb78c54ebbe65819dacc583ad3a
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.005, Eve: 0.005
+QBER (No Attack): 0.0063
+QBER (With Attack): 0.006
+Status: Secure
+AES Key: 39e497a15cd0c3a21fcb85666d663c80
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.006, Eve: 0.006
+QBER (No Attack): 0.002
+QBER (With Attack): 0.0061
+Status: Secure
+AES Key: 398b44a27edc77e8b61f11978b24f9b7
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.007, Eve: 0.007
+QBER (No Attack): 0.0019
+QBER (With Attack): 0.0133
+Status: Secure
+AES Key: 38331ba2ee2f5e5436f7e62b6db4b432
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.008, Eve: 0.008
+QBER (No Attack): 0.0101
+QBER (With Attack): 0.0099
+Status: Secure
+AES Key: 72eaaf310d5b0562ebb8c5c024dd703c
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.009, Eve: 0.009
+QBER (No Attack): 0.0104
+QBER (With Attack): 0.0176
+Status: Secure
+AES Key: 73f81c35e7e15e5342ce3715717c38b1
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.010, Eve: 0.010
+QBER (No Attack): 0.002
+QBER (With Attack): 0.0101
+Status: Secure
+AES Key: c3f285df0985ffaf4ce41aff92821dd5
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.011, Eve: 0.011
+QBER (No Attack): 0.0127
+QBER (With Attack): 0.0157
+Status: Secure
+AES Key: d62b1003b9c77534a4e0ac85c2f00dc1
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.012, Eve: 0.012
+QBER (No Attack): 0.0105
+QBER (With Attack): 0.0255
+Status: Secure
+AES Key: 386a88c59ac4dfb502d8329a5dc8d132
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.013, Eve: 0.013
+QBER (No Attack): 0.0142
+QBER (With Attack): 0.0154
+Status: Secure
+AES Key: 41224e1c29142d80ceb9431b71c18815
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.014, Eve: 0.014
+QBER (No Attack): 0.0152
+QBER (With Attack): 0.0081
+Status: Secure
+AES Key: d58b56d00c036cd8e17b8be642f28920
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.015, Eve: 0.015
+QBER (No Attack): 0.0171
+QBER (With Attack): 0.0162
+Status: Secure
+AES Key: 2e3cc1773def54040b53b232f5967ec2
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.016, Eve: 0.016
+QBER (No Attack): 0.0142
+QBER (With Attack): 0.0295
+Status: Secure
+AES Key: 2bbf8b34d7a8ad6cee7446dc2862674f
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.017, Eve: 0.017
+QBER (No Attack): 0.0097
+QBER (With Attack): 0.0154
+Status: Secure
+AES Key: de578b91d093e4ec2853f4d8af16ba4c
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.018, Eve: 0.018
+QBER (No Attack): 0.022
+QBER (With Attack): 0.0164
+Status: Secure
+AES Key: acd4d8b30e3a365e70b60caf97d3568f
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.019, Eve: 0.019
+QBER (No Attack): 0.0129
+QBER (With Attack): 0.0153
+Status: Secure
+AES Key: d8468a8b820b2cb00c7f29743c149b1a
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.020, Eve: 0.020
+QBER (No Attack): 0.0153
+QBER (With Attack): 0.0262
+Status: Secure
+AES Key: 6075649c40b80970c2625070998e024c
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.021, Eve: 0.021
+QBER (No Attack): 0.0282
+QBER (With Attack): 0.0187
+Status: Secure
+AES Key: cf3ed82afa90c333d9b0c3ed23063f11
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.022, Eve: 0.022
+QBER (No Attack): 0.0238
+QBER (With Attack): 0.0513
+Status: Secure
+AES Key: 47bb5ad1dfb14cea1eecf552b66f4e29
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.023, Eve: 0.023
+QBER (No Attack): 0.0254
+QBER (With Attack): 0.0339
+Status: Secure
+AES Key: 42d19a6c841b59c43103d4bc1c4b14a6
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.024, Eve: 0.024
+QBER (No Attack): 0.0233
+QBER (With Attack): 0.03
+Status: Secure
+AES Key: 783974be17e0f280f72c23db69ec0fff
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.025, Eve: 0.025
+QBER (No Attack): 0.0209
+QBER (With Attack): 0.0321
+Status: Secure
+AES Key: ad09e9f585b11f927e0e77e3a098305d
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.026, Eve: 0.026
+QBER (No Attack): 0.012
+QBER (With Attack): 0.0282
+Status: Secure
+AES Key: d94933fb808d3237893ae9ce4384d95e
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.027, Eve: 0.027
+QBER (No Attack): 0.0311
+QBER (With Attack): 0.0332
+Status: Secure
+AES Key: 4de4394b16fd2399539772af939acb66
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.028, Eve: 0.028
+QBER (No Attack): 0.0356
+QBER (With Attack): 0.0329
+Status: Secure
+AES Key: dd0f9fea6b73fe400d07c8889bd9d9fd
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.029, Eve: 0.029
+QBER (No Attack): 0.0295
+QBER (With Attack): 0.0435
+Status: Secure
+AES Key: b0825d35efc6c72f326fa2413180305e
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.030, Eve: 0.030
+QBER (No Attack): 0.0171
+QBER (With Attack): 0.0394
+Status: Secure
+AES Key: 2909b6d81de5b3b21bd698bd5a45d5f9
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.031, Eve: 0.031
+QBER (No Attack): 0.0231
+QBER (With Attack): 0.0573
+Status: Secure
+AES Key: 0dac8689a2ba172c8fa823d75e42a94f
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.032, Eve: 0.032
+QBER (No Attack): 0.0303
+QBER (With Attack): 0.0568
+Status: Secure
+AES Key: 74019251f272f3a8744ae89752628540
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.033, Eve: 0.033
+QBER (No Attack): 0.0377
+QBER (With Attack): 0.0515
+Status: Secure
+AES Key: cb0cf09560466bc8107cb203f2f79170
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.034, Eve: 0.034
+QBER (No Attack): 0.0401
+QBER (With Attack): 0.0561
+Status: Secure
+AES Key: 76b1774d389d6d533fe996aa53364080
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.035, Eve: 0.035
+QBER (No Attack): 0.0299
+QBER (With Attack): 0.0437
+Status: Secure
+AES Key: 9f26e491efc98086d1410192a3025cfa
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.036, Eve: 0.036
+QBER (No Attack): 0.0363
+QBER (With Attack): 0.0434
+Status: Secure
+AES Key: 993a3691cb071a3de8db790c4e311bd3
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.037, Eve: 0.037
+QBER (No Attack): 0.0339
+QBER (With Attack): 0.0445
+Status: Secure
+AES Key: a5f87676b5be3f9248216a1ab258fb46
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.038, Eve: 0.038
+QBER (No Attack): 0.0302
+QBER (With Attack): 0.0526
+Status: Secure
+AES Key: 71c629ff2819e3ad5ad02c759f6dd528
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.039, Eve: 0.039
+QBER (No Attack): 0.0411
+QBER (With Attack): 0.0357
+Status: Secure
+AES Key: 294435be9a4470aa34798310ae356bed
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.040, Eve: 0.040
+QBER (No Attack): 0.0278
+QBER (With Attack): 0.0455
+Status: Secure
+AES Key: 88100dc5bfefeff8dd1fe56d02fc3388
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.041, Eve: 0.041
+QBER (No Attack): 0.0432
+QBER (With Attack): 0.0586
+Status: Secure
+AES Key: 24879833198beb5e21411080bd434969
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.042, Eve: 0.042
+QBER (No Attack): 0.0393
+QBER (With Attack): 0.0545
+Status: Secure
+AES Key: 5698d57a2d385793a9d9c4f18cf1b21d
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.043, Eve: 0.043
+QBER (No Attack): 0.0428
+QBER (With Attack): 0.0656
+Status: Secure
+AES Key: 73d23d95e283b5ba9866bea1057e50c0
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.044, Eve: 0.044
+QBER (No Attack): 0.0535
+QBER (With Attack): 0.0402
+Status: Secure
+AES Key: 21ae5024964e6326c72acba9d7af99c2
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.045, Eve: 0.045
+QBER (No Attack): 0.037
+QBER (With Attack): 0.0422
+Status: Secure
+AES Key: 2da5085cd80d8fc5a654cfee07855072
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.046, Eve: 0.046
+QBER (No Attack): 0.0471
+QBER (With Attack): 0.0487
+Status: Secure
+AES Key: 36be570c13fa4a3718df963d87340008
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.047, Eve: 0.047
+QBER (No Attack): 0.0539
+QBER (With Attack): 0.0552
+Status: Secure
+AES Key: 98f777cff2e98924c84a4ec8828621fc
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.048, Eve: 0.048
+QBER (No Attack): 0.0554
+QBER (With Attack): 0.058
+Status: Secure
+AES Key: 863ec4f276743a14600e0645826446f4
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.049, Eve: 0.049
+QBER (No Attack): 0.0456
+QBER (With Attack): 0.0489
+Status: Secure
+AES Key: 92be7ca81bd74adae6838d8944e046d5
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.050, Eve: 0.050
+QBER (No Attack): 0.0537
+QBER (With Attack): 0.0762
+Status: Secure
+AES Key: d7d1fdda70de8933de02ba41db5978eb
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.051, Eve: 0.051
+QBER (No Attack): 0.0694
+QBER (With Attack): 0.0632
+Status: Secure
+AES Key: 8b5756448a3efe275805de6cf07754e4
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.052, Eve: 0.052
+QBER (No Attack): 0.0646
+QBER (With Attack): 0.064
+Status: Secure
+AES Key: e83d1cca06d6774e562ca9a1e489b091
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.053, Eve: 0.053
+QBER (No Attack): 0.0299
+QBER (With Attack): 0.062
+Status: Secure
+AES Key: feae8e362fd5f60e421230451ead986c
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.054, Eve: 0.054
+QBER (No Attack): 0.0531
+QBER (With Attack): 0.0552
+Status: Secure
+AES Key: 175b84509a829f890275e5f43f436b94
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.055, Eve: 0.055
+QBER (No Attack): 0.0723
+QBER (With Attack): 0.0665
+Status: Secure
+AES Key: acb5d9be3801bf853e9e8de96d4dd4e1
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.056, Eve: 0.056
+QBER (No Attack): 0.0598
+QBER (With Attack): 0.0778
+Status: Secure
+AES Key: 7e2cb964eff7fe33ee9c276c73604ddd
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.057, Eve: 0.057
+QBER (No Attack): 0.063
+QBER (With Attack): 0.0529
+Status: Secure
+AES Key: 57d69c11f080df3dfa4a731b60c5de88
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.058, Eve: 0.058
+QBER (No Attack): 0.0606
+QBER (With Attack): 0.0884
+Status: Secure
+AES Key: 224ccdf6196889cc747e61ffe2575bba
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.059, Eve: 0.059
+QBER (No Attack): 0.0497
+QBER (With Attack): 0.1089
+Status: Secure
+AES Key: 221c0844a00304f330169b95c137976c
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.060, Eve: 0.060
+QBER (No Attack): 0.0556
+QBER (With Attack): 0.0682
+Status: Secure
+AES Key: 6923a0091383335086f47e5f12663cdd
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.061, Eve: 0.061
+QBER (No Attack): 0.0637
+QBER (With Attack): 0.0626
+Status: Secure
+AES Key: 7717a185b6f7fc5e58c6f37cedf34b7f
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.062, Eve: 0.062
+QBER (No Attack): 0.039
+QBER (With Attack): 0.0775
+Status: Secure
+AES Key: ed7f7f6f0789110718cbccfa3e1e9d27
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.063, Eve: 0.063
+QBER (No Attack): 0.0684
+QBER (With Attack): 0.0766
+Status: Secure
+AES Key: 25acf28503dff5841a666d2011e37d33
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.064, Eve: 0.064
+QBER (No Attack): 0.0619
+QBER (With Attack): 0.0564
+Status: Secure
+AES Key: cf147c89a4850b2a94d4406ff37d1044
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.065, Eve: 0.065
+QBER (No Attack): 0.0637
+QBER (With Attack): 0.073
+Status: Secure
+AES Key: 8826c6848b497b8308772aa1453621e1
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.066, Eve: 0.066
+QBER (No Attack): 0.0498
+QBER (With Attack): 0.0664
+Status: Secure
+AES Key: c3c18eb48271407ffc520add6cf061c9
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.067, Eve: 0.067
+QBER (No Attack): 0.0503
+QBER (With Attack): 0.0782
+Status: Secure
+AES Key: 79dadd552b6d5d2f6a3fa4aebd7f0de9
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.068, Eve: 0.068
+QBER (No Attack): 0.0661
+QBER (With Attack): 0.0856
+Status: Secure
+AES Key: d4b24b4be71452fcdb22303788c4be52
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.069, Eve: 0.069
+QBER (No Attack): 0.0758
+QBER (With Attack): 0.0795
+Status: Secure
+AES Key: fcf119175410848a8b0589008bcdbf11
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.070, Eve: 0.070
+QBER (No Attack): 0.0714
+QBER (With Attack): 0.0961
+Status: Secure
+AES Key: 44212283d9cce98a8d434050c9f0efe3
+Decrypted: Hello Quantum
+----------------------------------------
+Noise: 0.071, Eve: 0.071
+QBER (No Attack): 0.0613
+QBER (With Attack): 0.1228
+Status: Rejected
+Key Rejected
+----------------------------------------

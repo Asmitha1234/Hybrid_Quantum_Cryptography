@@ -1,0 +1,7 @@
+# Team 181 — Hybrid Cryptographic System
+# Install with: pip install -r requirements.txt
+
+numpy>=1.24.0
+pycryptodome>=3.19.0
+matplotlib>=3.7.0
+streamlit>=1.28.0      # for the UI (Phase 2 deliverable)

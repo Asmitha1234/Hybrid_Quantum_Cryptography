@@ -1,0 +1,191 @@
+import numpy as np
+import random
+import hashlib
+import matplotlib.pyplot as plt
+import csv
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.lib.styles import getSampleStyleSheet
+
+# -----------------------------
+# PARAMETERS
+# -----------------------------
+N_BITS = 1000
+QBER_THRESHOLD = 0.11
+
+# -----------------------------
+# QKD SIMULATION FUNCTION
+# -----------------------------
+def run_qkd(noise_prob):
+    alice_bits = np.random.randint(0, 2, N_BITS)
+    alice_bases = np.random.choice(['+', 'x'], N_BITS)
+
+    transmitted_bits = []
+    for i in range(N_BITS):
+        bit = alice_bits[i]
+        if random.random() < noise_prob:
+            bit = 1 - bit
+        transmitted_bits.append(bit)
+
+    bob_bases = np.random.choice(['+', 'x'], N_BITS)
+    bob_bits = []
+
+    for i in range(N_BITS):
+        if bob_bases[i] == alice_bases[i]:
+            bob_bits.append(transmitted_bits[i])
+        else:
+            bob_bits.append(random.randint(0, 1))
+
+    alice_key, bob_key = [], []
+
+    for i in range(N_BITS):
+        if alice_bases[i] == bob_bases[i]:
+            alice_key.append(alice_bits[i])
+            bob_key.append(bob_bits[i])
+
+    errors = sum(a != b for a, b in zip(alice_key, bob_key))
+    qber = errors / len(alice_key) if len(alice_key) > 0 else 1.0
+
+    return qber, alice_key
+
+# -----------------------------
+# QKD → AES KEY
+# -----------------------------
+def qkd_to_aes_key(qkd_key):
+    bit_string = ''.join(map(str, qkd_key))
+    return hashlib.sha256(bit_string.encode()).digest()[:16]
+
+# -----------------------------
+# PDF GENERATION
+# -----------------------------
+def generate_pdf_report(results):
+    doc = SimpleDocTemplate("qkd_report.pdf")
+    styles = getSampleStyleSheet()
+    content = []
+
+    content.append(Paragraph("QKD Simulation Report", styles['Title']))
+    content.append(Spacer(1, 12))
+
+    for row in results:
+        text = f"Noise: {row['noise']}, QBER: {row['qber']}, Status: {row['status']}"
+        content.append(Paragraph(text, styles['Normal']))
+        content.append(Spacer(1, 8))
+
+    doc.build(content)
+
+# -----------------------------
+# FILE SETUP
+# -----------------------------
+txt_file = open("qkd_results.txt", "w")
+txt_file.write("QKD Simulation Results\n")
+txt_file.write("="*50 + "\n")
+
+csv_file = open("qkd_results.csv", "w", newline="")
+csv_writer = csv.writer(csv_file)
+csv_writer.writerow(["Noise", "QBER", "Key Length", "Status", "AES Key"])
+
+# -----------------------------
+# MAIN LOOP
+# -----------------------------
+noise_values = []
+qber_values = []
+results_data = []
+
+print("\n--- AUTOMATED QKD TEST ---\n")
+
+for i in range(1000):  # up to noise = 1.0
+    noise = round(i * 0.001, 3)
+
+    qber, key = run_qkd(noise)
+
+    noise_values.append(noise)
+    qber_values.append(qber)
+
+    status = "Secure" if qber <= QBER_THRESHOLD else "Rejected"
+
+    # AES Key
+    aes_key_hex = ""
+    if status == "Secure":
+        aes_key = qkd_to_aes_key(key)
+        aes_key_hex = aes_key.hex()
+
+    # Console output
+    print(f"Noise: {noise:.3f}")
+    print(f"  QBER: {round(qber, 4)}")
+    print(f"  Key Length: {len(key)}")
+    print(f"  Status: {status}")
+    if aes_key_hex:
+        print(f"  AES Key: {aes_key_hex}")
+    print("-" * 40)
+
+    # TXT FILE
+    txt_output = f"Noise: {noise:.3f}\n"
+    txt_output += f"QBER: {round(qber, 4)}\n"
+    txt_output += f"Key Length: {len(key)}\n"
+    txt_output += f"Status: {status}\n"
+    if aes_key_hex:
+        txt_output += f"AES Key: {aes_key_hex}\n"
+    txt_output += "-" * 40 + "\n"
+
+    txt_file.write(txt_output)
+
+    # CSV FILE
+    csv_writer.writerow([
+        noise,
+        round(qber, 5),
+        len(key),
+        status,
+        aes_key_hex
+    ])
+
+    # PDF DATA
+    results_data.append({
+        "noise": noise,
+        "qber": round(qber, 5),
+        "status": status
+    })
+
+    # Stop at first failure
+    if status == "Rejected":
+        print("\nFirst failure at noise =", noise)
+        txt_file.write(f"\nFirst failure at noise = {noise}\n")
+        break
+
+# Close files
+txt_file.close()
+csv_file.close()
+
+# Generate PDF
+generate_pdf_report(results_data)
+
+# -----------------------------
+# GRAPH (LIVE)
+# -----------------------------
+plt.figure()
+plt.plot(noise_values, qber_values, marker='o')
+plt.axhline(y=QBER_THRESHOLD, linestyle='--')
+plt.xlabel("Noise Probability")
+plt.ylabel("QBER")
+plt.title("QBER vs Noise")
+plt.grid()
+plt.show()
+
+# -----------------------------
+# GRAPH FROM CSV
+# -----------------------------
+noise_csv = []
+qber_csv = []
+
+with open("qkd_results.csv", "r") as file:
+    reader = csv.DictReader(file)
+    for row in reader:
+        noise_csv.append(float(row["Noise"]))
+        qber_csv.append(float(row["QBER"]))
+
+plt.figure()
+plt.plot(noise_csv, qber_csv, marker='o')
+plt.axhline(y=QBER_THRESHOLD, linestyle='--')
+plt.xlabel("Noise Probability")
+plt.ylabel("QBER")
+plt.title("QBER vs Noise (From CSV)")
+plt.grid()
+plt.show()
