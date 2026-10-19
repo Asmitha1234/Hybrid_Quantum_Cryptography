@@ -80,7 +80,6 @@ Developed for the Capstone Project at PES University by **Team 181**.
 ├── oqs_auth.py                    # ML-DSA (Dilithium2) PQC digital signature handler
 ├── qkd_decoy.py                   # Decoy-state BB84 pulse generator & detector physics
 ├── fingerprinting.py              # Statistical threat detection & metric classification
-├── dashboard_app.py               # Python Streamlit SOC visual dashboard
 ├── index.html                     # Standalone HTML/Tailwind high-contrast SOC dashboard
 ├── alice_node.py                  # Quantum Tx node execution handler
 ├── bob_node.py                    # Quantum Rx node execution handler
