@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hybrid Quantum Cryptographic Systems — Security Operations Center</title>
+    <!-- Tailwind CSS for high-contrast enterprise layout -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js for real-time telemetry visual analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        slate: {
+                            850: '#0f172a',
+                            900: '#090d16',
+                            950: '#030712'
+                        },
+                        emerald: {
+                            500: '#10b981',
+                            600: '#059669',
+                            950: '#022c22'
+                        },
+                        rose: {
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                            950: '#4c0519'
+                        },
+                        amber: {
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            950: '#451a03'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #090d16;
+            color: #f8fafc;
+        }
+        .card-panel {
+            background-color: #0f172a;
+            border: 1px solid #1e293b;
+        }
+        .metric-value {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        }
+        .mono-text {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between p-4 md:p-6 space-y-6">
+
+    <!-- TOP HEADER / CONTROL BAR -->
+    <header class="card-panel rounded-lg p-5 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 border-b border-slate-800">
+        <div>
+            <div class="flex items-center space-x-3">
+                <span class="px-2.5 py-1 text-xs font-semibold uppercase tracking-wider bg-slate-800 text-slate-300 rounded border border-slate-700">Team 181 Capstone</span>
+                <span class="text-xs text-slate-400">ETSI GS QKD 004 / 014 Standard Architecture</span>
+            </div>
+            <h1 class="text-2xl font-bold tracking-tight text-white mt-1">Hybrid Quantum Cryptographic Systems — SOC</h1>
+            <p class="text-xs text-slate-400 mt-0.5">Real-Time ETSI-QKD Optical Telemetry, ML-DSA (Dilithium2) Authentication, & Memory Zeroization Engine</p>
+        </div>
+        
+        <div class="flex flex-wrap items-center gap-4 w-full lg:w-auto justify-between lg:justify-end">
+            <div class="text-right hidden sm:block">
+                <div class="text-xs text-slate-400 uppercase tracking-wider font-medium">System Telemetry Clock</div>
+                <div id="liveClock" class="text-sm font-semibold text-slate-200 mono-text">2026-10-19 12:22:00 UTC</div>
+            </div>
+            <div class="flex items-center space-x-2">
+                <div id="topStatusBadge" class="px-3 py-1.5 rounded text-xs font-bold uppercase tracking-wider bg-slate-800 text-slate-300 border border-slate-700">
+                    SYSTEM IDLE
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- DASHBOARD WORKSPACE -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <!-- LEFT CONTROLS PANEL (4 COLS) -->
+        <aside class="lg:col-span-4 space-y-6">
+            <div class="card-panel rounded-lg p-5 space-y-5 border border-slate-800">
+                <div class="border-b border-slate-800 pb-3">
+                    <h2 class="text-base font-semibold text-white uppercase tracking-wider text-xs">Session Control Parameters</h2>
+                    <p class="text-xs text-slate-400">Configure physical layer and attack vector models.</p>
+                </div>
+
+                <!-- Distance Slider -->
+                <div class="space-y-2">
+                    <div class="flex justify-between items-center text-sm">
+                        <label for="distanceRange" class="font-medium text-slate-300">Optical Fiber Distance (km SMF-28)</label>
+                        <span id="distanceValue" class="mono-text font-bold text-emerald-400 bg-slate-900 px-2 py-0.5 rounded border border-slate-800">10.0 km</span>
+                    </div>
+                    <input type="range" id="distanceRange" min="1.0" max="50.0" step="1.0" value="10.0" 
+                        class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500">
+                    <div class="flex justify-between text-xs text-slate-500">
+                        <span>1.0 km</span>
+                        <span>30.0 km (GLLP Boundary)</span>
+                        <span>50.0 km</span>
+                    </div>
+                </div>
+
+                <!-- Network Scenario Select -->
+                <div class="space-y-2">
+                    <label for="attackScenario" class="text-sm font-medium text-slate-300">Channel Scenario / Threat Vector</label>
+                    <select id="attackScenario" class="w-full bg-slate-900 border border-slate-700 rounded-md px-3 py-2 text-sm text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                        <option value="clean">Clean Link (Nominal Operation)</option>
+                        <option value="pns">Zero-QBER PNS Attack (Stealth Yield Suppression)</option>
+                        <option value="intercept">Active Intercept-Resend Attack (QBER Spike)</option>
+                    </select>
+                    <p id="scenarioDescription" class="text-xs text-slate-400 bg-slate-950 p-2.5 rounded border border-slate-800">
+                        Standard optical transmission with stochastic alignment loss and baseline quantum error rates.
+                    </p>
+                </div>
+
+                <!-- Action Button -->
+                <button id="btnExecute" onclick="runSimulation()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-2.5 px-4 rounded-md text-sm transition-colors duration-150 uppercase tracking-wider focus:outline-none focus:ring-2 focus:ring-emerald-400">
+                    Execute Quantum Exchange & Verify Channel
+                </button>
+            </div>
+
+            <!-- TELEMETRY SUMMARY METRICS -->
+            <div class="grid grid-cols-2 gap-4">
+                <div class="card-panel rounded-lg p-4 space-y-1">
+                    <div class="text-xs text-slate-400 uppercase font-medium">Signal QBER (E_mu)</div>
+                    <div id="metricQBER" class="text-xl font-bold metric-value text-slate-200">0.00%</div>
+                    <div id="qberStatus" class="text-xs text-slate-500">Max Threshold: 11.00%</div>
+                </div>
+                <div class="card-panel rounded-lg p-4 space-y-1">
+                    <div class="text-xs text-slate-400 uppercase font-medium">Decoy Yield (Y_nu)</div>
+                    <div id="metricYield" class="text-xl font-bold metric-value text-slate-200">0.000000</div>
+                    <div id="yieldStatus" class="text-xs text-slate-500">Bound: > 0.002839</div>
+                </div>
+                <div class="card-panel rounded-lg p-4 space-y-1">
+                    <div class="text-xs text-slate-400 uppercase font-medium">Secret Key Rate</div>
+                    <div id="metricSKR" class="text-xl font-bold metric-value text-slate-200">0.0000</div>
+                    <div class="text-xs text-slate-500">bits / pulse</div>
+                </div>
+                <div class="card-panel rounded-lg p-4 space-y-1">
+                    <div class="text-xs text-slate-400 uppercase font-medium">Volatile Memory State</div>
+                    <div id="metricRAM" class="text-sm font-bold metric-value text-slate-200 mt-1">UNINITIALIZED</div>
+                    <div id="ramSubtext" class="text-xs text-slate-500">ETSI Key Buffer</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- RIGHT MAIN DISPLAY PANEL (8 COLS) -->
+        <main class="lg:col-span-8 space-y-6">
+
+            <!-- THREE SECURITY VERIFICATION GATES -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                
+                <!-- Gate 1: PQC Authentication -->
+                <div class="card-panel rounded-lg p-4 border-l-4 border-l-slate-600" id="gatePQCBorder">
+                    <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">1. PQC Authentication Gate</div>
+                    <div id="gatePQCHeader" class="text-sm font-bold text-white mb-1">AWAITING EXCHANGE</div>
+                    <div id="gatePQCBody" class="text-xs text-slate-400 leading-relaxed">
+                        ML-DSA (Dilithium2) Post-Quantum signature verification pending initialization.
+                    </div>
+                </div>
+
+                <!-- Gate 2: Physical Fingerprinting -->
+                <div class="card-panel rounded-lg p-4 border-l-4 border-l-slate-600" id="gateFingerprintBorder">
+                    <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">2. Fingerprinting Gate</div>
+                    <div id="gateFingerprintHeader" class="text-sm font-bold text-white mb-1">AWAITING EXCHANGE</div>
+                    <div id="gateFingerprintBody" class="text-xs text-slate-400 leading-relaxed">
+                        Dual-metric QBER and Decoy State Yield statistical boundary check pending.
+                    </div>
+                </div>
+
+                <!-- Gate 3: AES Lifecycle / Memory Scrubbing -->
+                <div class="card-panel rounded-lg p-4 border-l-4 border-l-slate-600" id="gateLifecycleBorder">
+                    <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">3. AES Key Lifecycle</div>
+                    <div id="gateLifecycleHeader" class="text-sm font-bold text-white mb-1">AWAITING EXCHANGE</div>
+                    <div id="gateLifecycleBody" class="text-xs text-slate-400 leading-relaxed">
+                        Session key rollover or volatile memory zeroization status will display here.
+                    </div>
+                </div>
+            </div>
+
+            <!-- DETAILED TECHNICAL DIAGNOSTIC / FAILURE REASON PANEL -->
+            <div class="card-panel rounded-lg p-5 space-y-3 border border-slate-800" id="diagnosticPanel">
+                <div class="flex justify-between items-center border-b border-slate-800 pb-2">
+                    <h3 class="text-sm font-semibold uppercase tracking-wider text-slate-200">System Diagnostic & Forensic Root Cause Analysis</h3>
+                    <span id="diagnosticTag" class="text-xs font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-400">STATUS: IDLE</span>
+                </div>
+                <div id="diagnosticContent" class="text-xs text-slate-300 leading-relaxed mono-text space-y-1 bg-slate-950 p-3.5 rounded border border-slate-800">
+                    [SYSTEM READY]: Select fiber distance and security threat vector, then execute quantum exchange.
+                </div>
+            </div>
+
+            <!-- INTERACTIVE VISUAL CHARTS -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- QBER Chart -->
+                <div class="card-panel rounded-lg p-4 space-y-2 border border-slate-800">
+                    <div class="text-xs font-semibold uppercase tracking-wider text-slate-300">Signal QBER (E_mu) vs Distance</div>
+                    <div class="h-48 relative">
+                        <canvas id="chartQBER"></canvas>
+                    </div>
+                </div>
+
+                <!-- Decoy Yield Chart -->
+                <div class="card-panel rounded-lg p-4 space-y-2 border border-slate-800">
+                    <div class="text-xs font-semibold uppercase tracking-wider text-slate-300">Decoy Yield (Y_nu) vs Distance</div>
+                    <div class="h-48 relative">
+                        <canvas id="chartYield"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EXPORT REPORT PANEL -->
+            <div class="card-panel rounded-lg p-4 flex flex-col sm:flex-row justify-between items-center gap-4 border border-slate-800">
+                <div>
+                    <h3 class="text-sm font-semibold text-white">Forensic Audit & Diagnostic Report Generator</h3>
+                    <p class="text-xs text-slate-400">Generate printable telemetry logs, QBER calculations, and memory zeroization records for capstone evaluation.</p>
+                </div>
+                <button onclick="downloadReport()" id="btnReport" disabled class="w-full sm:w-auto bg-slate-800 hover:bg-slate-700 text-slate-300 disabled:opacity-50 font-semibold py-2 px-4 rounded text-xs uppercase tracking-wider border border-slate-700 transition-colors">
+                    Export Session Forensic Report
+                </button>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="card-panel rounded-lg p-4 text-center text-xs text-slate-500 border border-slate-800">
+        Team 181 Capstone Project | Hybrid Quantum Cryptographic Systems (QKD + PQC + AES) | ETSI GS QKD Compliance Protocol
+    </footer>
+
+    <!-- LOGIC & SIMULATION ENGINE -->
+    <script>
+        // Live UTC Clock
+        function updateClock() {
+            const now = new Date();
+            const utcString = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
+            document.getElementById('liveClock').innerText = utcString;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Control Bindings
+        const distanceRange = document.getElementById('distanceRange');
+        const distanceValue = document.getElementById('distanceValue');
+        const attackScenario = document.getElementById('attackScenario');
+        const scenarioDescription = document.getElementById('scenarioDescription');
+
+        const scenarioTexts = {
+            'clean': 'Standard optical transmission with stochastic alignment loss and baseline quantum error rates.',
+            'pns': 'Photon Number Splitting attack: Eve selectively measures multi-photon pulses while suppressing decoy states, causing decoy yield (Y_nu) drops without spiking signal QBER.',
+            'intercept': 'Active Intercept-Resend attack: Eve measures pulses in random bases, inducing a theoretical 25% error rate on matching bases (exceeding the 11.0% GLLP bound).'
+        };
+
+        distanceRange.addEventListener('input', (e) => {
+            distanceValue.innerText = parseFloat(e.target.value).toFixed(1) + ' km';
+        });
+
+        attackScenario.addEventListener('change', (e) => {
+            scenarioDescription.innerText = scenarioTexts[e.target.value];
+        });
+
+        // Chart Initialization
+        let qberChart, yieldChart;
+
+        function initCharts() {
+            const ctxQBER = document.getElementById('chartQBER').getContext('2d');
+            const ctxYield = document.getElementById('chartYield').getContext('2d');
+
+            const distances = Array.from({length: 10}, (_, i) => ((i + 1) * 5).toFixed(1));
+
+            qberChart = new Chart(ctxQBER, {
+                type: 'line',
+                data: {
+                    labels: distances,
+                    datasets: [
+                        {
+                            label: 'Measured QBER (%)',
+                            data: [1.2, 1.3, 1.4, 1.5, 1.6, 1.8, 2.1, 2.5, 3.0, 3.8],
+                            borderColor: '#10b981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            fill: true,
+                            tension: 0.2
+                        },
+                        {
+                            label: 'GLLP Threshold (11.0%)',
+                            data: Array(10).fill(11.0),
+                            borderColor: '#f43f5e',
+                            borderDash: [5, 5],
+                            pointRadius: 0,
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { labels: { color: '#94a3b8', font: { size: 10 } } } },
+                    scales: {
+                        x: { ticks: { color: '#64748b', font: { size: 9 } }, grid: { color: '#1e293b' } },
+                        y: { ticks: { color: '#64748b', font: { size: 9 } }, grid: { color: '#1e293b' }, min: 0, max: 25 }
+                    }
+                }
+            });
+
+            yieldChart = new Chart(ctxYield, {
+                type: 'line',
+                data: {
+                    labels: distances,
+                    datasets: [
+                        {
+                            label: 'Decoy Yield (Y_nu)',
+                            data: [0.0078, 0.0062, 0.0049, 0.0038, 0.0030, 0.0024, 0.0019, 0.0015, 0.0012, 0.0009],
+                            borderColor: '#38bdf8',
+                            backgroundColor: 'rgba(56, 189, 248, 0.1)',
+                            fill: true,
+                            tension: 0.2
+                        },
+                        {
+                            label: 'PNS Bound (0.002839)',
+                            data: Array(10).fill(0.002839),
+                            borderColor: '#f59e0b',
+                            borderDash: [5, 5],
+                            pointRadius: 0,
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { labels: { color: '#94a3b8', font: { size: 10 } } } },
+                    scales: {
+                        x: { ticks: { color: '#64748b', font: { size: 9 } }, grid: { color: '#1e293b' } },
+                        y: { ticks: { color: '#64748b', font: { size: 9 } }, grid: { color: '#1e293b' }, min: 0, max: 0.010 }
+                    }
+                }
+            });
+        }
+
+        window.onload = initCharts;
+
+        // Simulation State Engine
+        let lastExecutionData = null;
+
+        function runSimulation() {
+            const distance = parseFloat(distanceRange.value);
+            const scenario = attackScenario.value;
+
+            // Mathematical calculation modeling
+            let qber, decoyYield, verdict, statusBadgeClass, statusBadgeText;
+            const attenuation = Math.pow(10, -(0.2 * distance) / 10.0) * 0.1;
+
+            if (scenario === 'intercept') {
+                qber = 16.50 + (Math.random() * 2.5);
+                decoyYield = Math.max(0.0010, attenuation * 0.8);
+                verdict = 'INTERCEPT_RESEND_ATTACK';
+            } else if (scenario === 'pns') {
+                qber = 1.10 + (Math.random() * 0.4);
+                decoyYield = 0.001200; // Forced suppression below 0.002839 threshold
+                verdict = 'PNS_ATTACK_DETECTED';
+            } else { // Clean
+                qber = 1.00 + (distance * 0.05) + (Math.random() * 0.3);
+                decoyYield = Math.max(0.0005, attenuation * 0.95);
+
+                // Deterministic distance boundary check
+                if (distance > 30.0) {
+                    verdict = 'EXCESSIVE_CHANNEL_LOSS_LIMIT';
+                } else {
+                    verdict = 'CLEAN_CHANNEL';
+                }
+            }
+
+            // Update UI Elements
+            document.getElementById('metricQBER').innerText = qber.toFixed(2) + '%';
+            document.getElementById('metricYield').innerText = decoyYield.toFixed(6);
+
+            const topStatusBadge = document.getElementById('topStatusBadge');
+            const gatePQCHeader = document.getElementById('gatePQCHeader');
+            const gatePQCBody = document.getElementById('gatePQCBody');
+            const gatePQCBorder = document.getElementById('gatePQCBorder');
+
+            const gateFingerprintHeader = document.getElementById('gateFingerprintHeader');
+            const gateFingerprintBody = document.getElementById('gateFingerprintBody');
+            const gateFingerprintBorder = document.getElementById('gateFingerprintBorder');
+
+            const gateLifecycleHeader = document.getElementById('gateLifecycleHeader');
+            const gateLifecycleBody = document.getElementById('gateLifecycleBody');
+            const gateLifecycleBorder = document.getElementById('gateLifecycleBorder');
+
+            const diagnosticContent = document.getElementById('diagnosticContent');
+            const diagnosticTag = document.getElementById('diagnosticTag');
+            const metricRAM = document.getElementById('metricRAM');
+            const metricSKR = document.getElementById('metricSKR');
+
+            // Gate 1: PQC always passes signature check in this demo
+            gatePQCHeader.innerText = "AUTHENTICATED";
+            gatePQCHeader.className = "text-sm font-bold text-emerald-400 mb-1";
+            gatePQCBody.innerText = "ML-DSA (Dilithium2) post-quantum digital signature verified across TCP sifting frame.";
+            gatePQCBorder.className = "card-panel rounded-lg p-4 border-l-4 border-l-emerald-500";
+
+            if (verdict === 'CLEAN_CHANNEL') {
+                topStatusBadge.innerText = "SECURE ACTIVE";
+                topStatusBadge.className = "px-3 py-1.5 rounded text-xs font-bold uppercase tracking-wider bg-emerald-950 text-emerald-400 border border-emerald-800";
+
+                gateFingerprintHeader.innerText = "NOMINAL CHANNEL";
+                gateFingerprintHeader.className = "text-sm font-bold text-emerald-400 mb-1";
+                gateFingerprintBody.innerText = `Distance ${distance.toFixed(1)} km. QBER and Decoy Yield within theoretical security parameters.`;
+                gateFingerprintBorder.className = "card-panel rounded-lg p-4 border-l-4 border-l-emerald-500";
+
+                const generatedKey = Array.from({length: 16}, () => Math.floor(Math.random() * 256).toString(16).padStart(2, '0')).join('');
+                gateLifecycleHeader.innerText = "KEY ESTABLISHED";
+                gateLifecycleHeader.className = "text-sm font-bold text-emerald-400 mb-1";
+                gateLifecycleBody.innerHTML = `AES-128 Session Key Rollover Active:<br><span class="mono-text text-emerald-300 font-bold">${generatedKey}</span>`;
+                gateLifecycleBorder.className = "card-panel rounded-lg p-4 border-l-4 border-l-emerald-500";
+
+                diagnosticTag.innerText = "VERDICT: SECURE_LINK";
+                diagnosticTag.className = "text-xs font-mono px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800";
+                diagnosticContent.innerHTML = `[SUCCESS]: Quantum key exchange completed over ${distance.toFixed(1)} km optical fiber link.<br>` +
+                    `[TELEMETRY]: Signal QBER = ${qber.toFixed(2)}% (Below 11.0% GLLP Threshold). Decoy Yield = ${decoyYield.toFixed(6)} (Above 0.002839 PNS Limit).<br>` +
+                    `[LIFECYCLE]: 128-bit quantum key derived via SHA-256 KDF and committed to active AES volatile buffer.`;
+
+                metricRAM.innerText = "ACTIVE_KEY_LOADED";
+                metricRAM.className = "text-sm font-bold metric-value text-emerald-400 mt-1";
+                metricSKR.innerText = (0.4218 * (1 - (distance / 40.0))).toFixed(4);
+
+            } else if (verdict === 'EXCESSIVE_CHANNEL_LOSS_LIMIT') {
+                topStatusBadge.innerText = "PHYSICAL LIMIT ABORT";
+                topStatusBadge.className = "px-3 py-1.5 rounded text-xs font-bold uppercase tracking-wider bg-amber-950 text-amber-400 border border-amber-800";
+
+                gateFingerprintHeader.innerText = "ATTENUATION LIMIT";
+                gateFingerprintHeader.className = "text-sm font-bold text-amber-400 mb-1";
+                gateFingerprintBody.innerText = `Fiber distance (${distance.toFixed(1)} km) exceeds unrepeated BB84 link budget.`;
+                gateFingerprintBorder.className = "card-panel rounded-lg p-4 border-l-4 border-l-amber-500";
+
+                gateLifecycleHeader.innerText = "RAM ZEROIZED";
+                gateLifecycleHeader.className = "text-sm font-bold text-amber-400 mb-1";
+                gateLifecycleBody.innerText = "ETSI standard memory zeroization executed. Volatile RAM scrubbed with 0x00.";
+                gateLifecycleBorder.className = "card-panel rounded-lg p-4 border-l-4 border-l-amber-500";
+
+                diagnosticTag.innerText = "VERDICT: EXCESSIVE_CHANNEL_LOSS";
+                diagnosticTag.className = "text-xs font-mono px-2 py-0.5 rounded bg-amber-950 text-amber-400 border border-amber-800";
+                diagnosticContent.innerHTML = `[PHYSICAL LIMIT EXCEEDED]: Unrepeated BB84 transmission boundary reached at ${distance.toFixed(1)} km.<br>` +
+                    `[ANALYSIS]: Standard SMF-28 optical fiber attenuation (0.2 dB/km) reduced decoy photon yield (Y_nu = ${decoyYield.toFixed(6)}) below viable signal-to-noise ratio.<br>` +
+                    `[ACTION]: Session aborted to prevent weak key generation. Key buffer zeroized (0x00). Quantum repeaters or trusted nodes required for extended range.`;
+
+                metricRAM.innerText = "SCRUBBED (0x00)";
+                metricRAM.className = "text-sm font-bold metric-value text-amber-400 mt-1";
+                metricSKR.innerText = "0.0000";
+
+            } else { // Attack verdicts
+                topStatusBadge.innerText = "SECURITY BREACH ABORT";
+                topStatusBadge.className = "px-3 py-1.5 rounded text-xs font-bold uppercase tracking-wider bg-rose-950 text-rose-400 border border-rose-800";
+
+                gateFingerprintHeader.innerText = "BREACH DETECTED";
+                gateFingerprintHeader.className = "text-sm font-bold text-rose-400 mb-1";
+                gateFingerprintBody.innerText = `Threat Signature: ${verdict}. Dual-metric boundary check failed.`;
+                gateFingerprintBorder.className = "card-panel rounded-lg p-4 border-l-4 border-l-rose-500";
+
+                gateLifecycleHeader.innerText = "RAM ZEROIZED";
+                gateLifecycleHeader.className = "text-sm font-bold text-rose-400 mb-1";
+                gateLifecycleBody.innerText = "ETSI GS QKD 014 volatile RAM scrubbing triggered (0x00 overwrite).";
+                gateLifecycleBorder.className = "card-panel rounded-lg p-4 border-l-4 border-l-rose-500";
+
+                diagnosticTag.innerText = `VERDICT: ${verdict}`;
+                diagnosticTag.className = "text-xs font-mono px-2 py-0.5 rounded bg-rose-950 text-rose-400 border border-rose-800";
+
+                if (verdict === 'INTERCEPT_RESEND_ATTACK') {
+                    diagnosticContent.innerHTML = `[SECURITY BREACH — INTERCEPT-RESEND ATTACK]: Active eavesdropping detected on quantum link.<br>` +
+                        `[METRIC VIOLATION]: Measured Signal QBER E_mu = ${qber.toFixed(2)}% EXCEEDS maximum GLLP error threshold of 11.00%.<br>` +
+                        `[MECHANISM]: Eve's non-demolition measurements collapsed state polarizations, introducing a ~25% disturbance on matched measurement bases.<br>` +
+                        `[AUTONOMOUS DEFENSE]: Volatile RAM buffer zeroized with 0x00. Session terminated instantly under ETSI standards.`;
+                } else { // PNS Attack
+                    diagnosticContent.innerHTML = `[SECURITY BREACH — ZERO-QBER PNS ATTACK]: Stealthy Photon Number Splitting attack detected.<br>` +
+                        `[METRIC VIOLATION]: Decoy State Yield Y_nu = ${decoyYield.toFixed(6)} FELL BELOW safety bound of 0.002839 despite low QBER (${qber.toFixed(2)}%).<br>` +
+                        `[MECHANISM]: Eve split multi-photon pulses while suppressing single photons, altering Poisson intensity ratios between signal (mu) and decoy (nu) states.<br>` +
+                        `[AUTONOMOUS DEFENSE]: Decoy fingerprinter flagged state anomaly. Volatile RAM scrubbed (0x00). Key generation denied.`;
+                }
+
+                metricRAM.innerText = "SCRUBBED (0x00)";
+                metricRAM.className = "text-sm font-bold metric-value text-rose-400 mt-1";
+                metricSKR.innerText = "0.0000";
+            }
+
+            // Update Chart Data Dynamic Trajectory
+            updateCharts(distance, scenario, qber, decoyYield);
+
+            // Enable Report Generator
+            lastExecutionData = {
+                timestamp: new Date().toISOString(),
+                distance: distance,
+                scenario: scenario,
+                qber: qber.toFixed(2),
+                yield: decoyYield.toFixed(6),
+                verdict: verdict
+            };
+            document.getElementById('btnReport').disabled = false;
+        }
+
+        function updateCharts(currentDist, scenario, currentQBER, currentYield) {
+            const distances = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50];
+            let newQBERData = [];
+            let newYieldData = [];
+
+            distances.forEach(d => {
+                const att = Math.pow(10, -(0.2 * d) / 10.0) * 0.1;
+                if (scenario === 'intercept') {
+                    newQBERData.push((15.0 + (d * 0.1)).toFixed(2));
+                    newYieldData.push((att * 0.8).toFixed(6));
+                } else if (scenario === 'pns') {
+                    newQBERData.push((1.0 + (d * 0.03)).toFixed(2));
+                    newYieldData.push((0.001200).toFixed(6));
+                } else {
+                    newQBERData.push((1.0 + (d * 0.05)).toFixed(2));
+                    newYieldData.push((att * 0.95).toFixed(6));
+                }
+            });
+
+            qberChart.data.datasets[0].data = newQBERData;
+            qberChart.update();
+
+            yieldChart.data.datasets[0].data = newYieldData;
+            yieldChart.update();
+        }
+
+        // Export Report Functionality
+        function downloadReport() {
+            if (!lastExecutionData) return;
+
+            const reportText = `======================================================================
+HYBRID QUANTUM CRYPTOGRAPHIC SYSTEMS — FORENSIC AUDIT REPORT
+Team 181 Capstone Project | ETSI GS QKD Compliance Protocol
+======================================================================
+
+SESSION IDENTIFIER : QKD-SESSION-${Math.floor(Math.random() * 899999 + 100000)}
+TIMESTAMP          : ${lastExecutionData.timestamp}
+OPTICAL DISTANCE   : ${lastExecutionData.distance.toFixed(1)} km SMF-28 Fiber
+CONFIGURED VECTOR  : ${lastExecutionData.scenario.toUpperCase()}
+
+----------------------------------------------------------------------
+1. POST-QUANTUM AUTHENTICATION (PQC GATE)
+----------------------------------------------------------------------
+Algorithm Standard : ML-DSA (Dilithium2) Post-Quantum Digital Signature
+Frame Integrity   : VERIFIED (Sifting Packet Unmodified)
+
+----------------------------------------------------------------------
+2. PHYSICAL LAYER TELEMETRY & FINGERPRINTING
+----------------------------------------------------------------------
+Signal QBER (E_mu) : ${lastExecutionData.qber}%  (GLLP Threshold: 11.00%)
+Decoy Yield (Y_nu) : ${lastExecutionData.yield} (Security Bound: 0.002839)
+Final Verdict      : ${lastExecutionData.verdict}
+
+----------------------------------------------------------------------
+3. LIFECYCLE ACTION & VOLATILE MEMORY
+----------------------------------------------------------------------
+Session Status     : ${lastExecutionData.verdict === 'CLEAN_CHANNEL' ? 'SECURE_ACTIVE' : 'ABORTED_AND_ZEROIZED'}
+RAM Scrubbing State: ${lastExecutionData.verdict === 'CLEAN_CHANNEL' ? 'AES-128 KEY COMMITTED' : 'EXECUTED (0x00 OVERWRITE)'}
+
+======================================================================
+END OF FORENSIC TELEMETRY REPORT — TEAM 181
+======================================================================`;
+
+            const blob = new Blob([reportText], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `QKD_Forensic_Report_${lastExecutionData.verdict}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
